@@ -1,0 +1,178 @@
+http://localhost:4000/api/health --> VERFICAR QUE EL ENDPOINT BÁSICO ESTE FUNCIONANDO
+
+
+========================================================================= CUSTOMER =============================================================================
+Crear (POST):
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":false}"
+
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
+
+
+Listar (GET):
+curl http://localhost:4000/api/customers
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/customers/<customer_id>
+
+
+Actualizar (PUT):
+curl -X PUT http://localhost:4000/api/customers/<customer_id> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"María López\",\"email\":\"maria.lopez@outlook.mx\",\"phone\":\"5523456789\",\"address\":\"Col. Obrera 12, Monterrey, NL\",\"active\":true}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/customers/1626806f-cfc5-441a-a63f-6a1a5f3e072c
+
+==============================================================================================================================================================
+
+
+========================================================================= SERVICE =============================================================================
+Crear (POST):
+curl -X POST http://localhost:4000/api/services ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Póliza Jurídica Digital\",\"description\":\"Protección esencial para tu arrendamiento con cobertura legal básica.\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/services ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Investigación Digital\",\"description\":\"Cobertura ampliada con investigación y negociación de contrato.\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/services ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Protección Total\",\"description\":\"Maxima protección legal y financiera con cobertura integral.\",\"active\":true}"
+
+
+Listar (GET):
+curl http://localhost:4000/api/services
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/services/<service_id>
+
+
+Actualizar (PUT):
+curl -X PUT http://localhost:4000/api/services/<service_id> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Protección Diamante\",\"description\":\"Cobertura extendida\",\"active\":true}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/services/<service_id>
+==============================================================================================================================================================
+
+
+========================================================================= SESSION ==============================================================================
+Crear (POST):
+curl -X POST http://localhost:4000/api/sessions ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"1626806f-cfc5-441a-a63f-6a1a5f3e072c\",\"user_agent\":\"Chrome/119 Win10\",\"status\":\"ended\"}"
+
+curl -X POST http://localhost:4000/api/sessions ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"1AQUI ESCRIBIR\",\"user_agent\":\"Safari/17 iOS\",\"status\":\"active\"}"
+
+ curl -X POST http://localhost:4000/api/sessions ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"AQUI ESCRIBIR\",\"user_agent\":\"Firefox/120 Ubuntu\",\"status\":\"active\"}" 
+
+
+Listar (GET):
+curl http://localhost:4000/api/sessions
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/sessions/<session_id>
+
+
+Actualizar (PUT):
+curl.exe -X PUT http://localhost:4000/api/sessions/<SESSION_ID> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"user_agent\":\"Edge/119 Win11\",\"status\":\"active\"}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/sessions/<session_id>
+===============================================================================================================================================================
+
+
+========================================================================= VERIFICATION =============================================================================
+Crear (POST):
+curl -X POST http://localhost:4000/api/verification ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
+
+
+Listar (GET):
+curl http://localhost:4000/api/verifications
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/verifications/<verification_id>
+
+
+Actualizar (PUT):
+curl -X PUT http://localhost:4000/api/verifications/<verification_id> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Byron Jorge\",\"email\":\"byron.jorge@yahoo.mx\",\"phone\":\"7351829788\",\"address\":\"Col. Avionetas, Cuautla, Mor\",\"active\":true}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/verifications/<verification_id>
+
+==============================================================================================================================================================
+
+
+========================================================================= PAYMENT =============================================================================
+Crear (POST):
+curl -X POST http://localhost:4000/api/payments ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/cpayments ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/payments ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
+
+curl -X POST http://localhost:4000/api/customers ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"María López\",\"email\":\"maria.lopez@outlook.mx\",\"phone\":\"5523456789\",\"address\":\"U.H Piedra Blanca, Cuautla, Mor\",\"active\":true}"
+
+
+Listar (GET):
+curl http://localhost:4000/api/payments
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/payments/<payment_id>
+
+
+Actualizar (PUT):
+curl -X PUT http://localhost:4000/api/payments/<payment_id> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Byron Jorge\",\"email\":\"byron.jorge@yahoo.mx\",\"phone\":\"7351829788\",\"address\":\"Col. Avionetas, Cuautla, Mor\",\"active\":true}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/payments/<payment_id>
+
+==============================================================================================================================================================

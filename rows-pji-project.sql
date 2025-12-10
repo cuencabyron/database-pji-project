@@ -31,18 +31,76 @@ INSERT INTO session (session_id, customer_id, user_agent, status, started_at, en
 
 
 /* ==================================================== VERIFICATION ======================================================== */
+-- cus_001: una verificación aprobada y una pendiente expirada
+INSERT INTO verification
+(verification_id, customer_id, session_id, type, status, attempts, expires_at, verified_at, created_at, updated_at)
+VALUES
+('vrf_0001', 'cus_001', 'ses_001', 'email',       'approved', 1, NOW() + INTERVAL 3 DAY,  NOW() - INTERVAL 1 DAY, NOW(), NOW()),
+('vrf_0002', 'cus_001', 'ses_002', 'sms',         'expired',  3, NOW() - INTERVAL 5 DAY,  NULL,                  NOW() - INTERVAL 6 DAY, NOW());
 
+-- cus_002: pendiente (aún no verifica)
+INSERT INTO verification
+(verification_id, customer_id, session_id, type, status, attempts, expires_at, verified_at, created_at, updated_at)
+VALUES
+('vrf_0101', 'cus_002', 'ses_101', 'email',       'pending',  0, NOW() + INTERVAL 2 DAY,  NULL,                  NOW(), NOW());
 
+-- cus_003: rechazado
+INSERT INTO verification
+(verification_id, customer_id, session_id, type, status, attempts, expires_at, verified_at, created_at, updated_at)
+VALUES
+('vrf_0201', 'cus_003', 'ses_201', 'kyc',         'rejected', 2, NOW() - INTERVAL 1 DAY,  NULL,                  NOW() - INTERVAL 2 DAY, NOW());
 
+-- cus_004: aprobada
+INSERT INTO verification
+(verification_id, customer_id, session_id, type, status, attempts, expires_at, verified_at, created_at, updated_at)
+VALUES
+('vrf_0301', 'cus_004', 'ses_301', 'email',       'approved', 1, NOW() + INTERVAL 7 DAY,  NOW() - INTERVAL 1 HOUR, NOW(), NOW());
 
+-- cus_005: pendiente sms y aprobada email
+INSERT INTO verification
+(verification_id, customer_id, session_id, type, status, attempts, expires_at, verified_at, created_at, updated_at)
+VALUES
+('vrf_0401', 'cus_005', 'ses_401', 'sms',         'pending',  1, NOW() + INTERVAL 1 DAY,  NULL,                  NOW(), NOW()),
+('vrf_0402', 'cus_005', 'ses_401', 'email',       'approved', 1, NOW() + INTERVAL 3 DAY,  NOW() - INTERVAL 30 MINUTE, NOW(), NOW());
 /* ========================================================================================================================== */
 
 
 /* ==================================================== PAYMENT ======================================================== */
+-- cus_001 compra un PRODUCTO (pagado, tarjeta)
+INSERT INTO payment
+(payment_id, customer_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0001', 'cus_001', NULL, 299.00, 'MXN', 'card',     'paid',    'PAY-001-TPV', NOW() - INTERVAL 1 DAY, NOW(), NOW());
 
+-- cus_001 paga un SERVICIO (pendiente, transferencia)
+INSERT INTO payment
+(payment_id, customer_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0002', 'cus_001', NULL, 'srv_A01', 850.00, 'MXN', 'bank',    'pending', 'XFER-001',     NULL,                 NOW(), NOW());
 
+-- cus_002 compra PRODUCTO (fallido)
+INSERT INTO payment
+(payment_id, customer_id, product_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0101', 'cus_002', 'prd_200', NULL, 499.00, 'MXN', 'card',    'failed',  'PAY-FAIL-01',  NULL,                 NOW(), NOW());
 
+-- cus_003 paga SERVICIO (pagado, OXXO)
+INSERT INTO payment
+(payment_id, customer_id, product_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0201', 'cus_003', NULL, 'srv_A03', 1200.00,'MXN', 'oxxo',    'paid',    'OXXO-234234',  NOW() - INTERVAL 3 DAY, NOW(), NOW());
 
+-- cus_004 compra PRODUCTO (reembolsado)
+INSERT INTO payment
+(payment_id, customer_id, product_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0301', 'cus_004', 'prd_300', NULL, 799.00, 'MXN', 'card',    'refunded','RF-300',       NOW() - INTERVAL 10 DAY, NOW(), NOW());
+
+-- cus_005 paga SERVICIO (pagado, transferencia)
+INSERT INTO payment
+(payment_id, customer_id, product_id, service_id, amount, currency, method, status, external_ref, paid_at, created_at, updated_at)
+VALUES
+('pay_0401', 'cus_005', NULL, 'srv_A02', 1500.00,'MXN', 'bank',    'paid',    'XFER-7788',    NOW() - INTERVAL 2 HOUR, NOW(), NOW());
 /* ========================================================================================================================== */
 
 

@@ -18,19 +18,35 @@ cd C:\wamp64\bin\mariadb\mariadb11.5.2\bin
 mysql -u root
 */
 
-CREATE DATABASE portal_pji_project;
-USE portal_pji_project;
+CREATE DATABASE portal_pji_project; -- Crea la base de datos llamada `portal_pji_project`
+USE portal_pji_project;             -- Define la base de datos a utilizar.
 
 /* ===================================== CUSTOMER ========================= */
-CREATE TABLE customer (                                              -- Crea la tabla llamada `customer
-  customer_id    CHAR(36)      NOT NULL,                             -- Identificador primario del cliente en formato UUID textual (36 chars).
-  name           VARCHAR(200)  NOT NULL,                             -- Nombre del cliente, hasta 200 carácteres.
-  email          VARCHAR(254)  NOT NULL,                             -- Email del cliente, hasta 254 carácteres es el máximo típico según estándares.
-  phone          VARCHAR(25)   NOT NULL,                             -- Teléfono, hasta 25 carácteres (incluye +, extensiones, espacios).       
-  address        VARCHAR(255)  NOT NULL,                             -- Dirección del cliente, asta 255 caracteres.                
+/**
+* Crea la tabla llamada `customer`
+* Identificador primario del cliente en formato UUID textual (36 chars).
+* Nombre del cliente, hasta 200 carácteres.
+* Email del cliente, hasta 255 carácteres es el máximo típico según estándares.
+* Teléfono, hasta 25 carácteres (incluye +, extensiones, espacios).
+* Dirección del cliente, asta 255 caracteres. 
+* Indicador de estado activo/inactivo. TINYINT(1) se usa como boolean (1=true). Por defecto 1 (activo).
+* Marca de tiempo de creación. Se llena automáticamente al insertar.
+* Marca de tiempo de última actualización. Se llena al insertar
+* Clave primaria de la tabla (usa el `customer_id`).
+* Motor de almacenamiento y opciones de codificación:
+*   InnoDB permite transacciones, FK, bloqueos por fila.
+*   Soporta todo Unicode (incluye emojis).
+*   Comparación 'a-i' (accent-insensitive) y 'ci' (case-insensitive).
+*/
+CREATE TABLE customer (                                              
+  customer_id    CHAR(36)      NOT NULL,                             
+  name           VARCHAR(200)  NOT NULL,                             
+  email          VARCHAR(255)  NOT NULL,                             
+  phone          VARCHAR(25)   NOT NULL,                                    
+  address        VARCHAR(255)  NOT NULL,                                           
   active         TINYINT(1)    NOT NULL DEFAULT 1,                    
-  created_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,   -- Marca de tiempo de creación. Se llena automáticamente al insertar.   
-  updated_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,    -- Marca de tiempo de última actualización. Se llena al insertar
+  created_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,      
+  updated_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,   
                                
   PRIMARY KEY (customer_id)     
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -51,6 +67,7 @@ CREATE TABLE service (
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* ============================================================== */
+
 
 /* ======================================= SESSION ======================================== */
 CREATE TABLE session (
@@ -121,9 +138,9 @@ CREATE INDEX idx_verification_customer_status ON verification (customer_id, stat
 CREATE TABLE service_price_range (
   range_id         CHAR(36)      NOT NULL,
   service_id       CHAR(36)      NOT NULL,
-  min_monthly_rent DECIMAL(12,2) NOT NULL,             
-  max_monthly_rent DECIMAL(12,2) NOT NULL,                       
-  annual_price     DECIMAL(12,2) NOT NULL,              
+  min_monthly_rent VARCHAR(10)   NOT NULL,             
+  max_monthly_rent VARCHAR(10)   NOT NULL,                       
+  annual_price     VARCHAR(10)   NOT NULL,              
   currency         CHAR(3)       NOT NULL DEFAULT 'MXN',
   description      VARCHAR(255)  NOT NULL,                      
   created_at       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,

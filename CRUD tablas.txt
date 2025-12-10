@@ -27,12 +27,11 @@ curl http://localhost:4000/api/customers/<customer_id>
 Actualizar (PUT):
 curl -X PUT http://localhost:4000/api/customers/<customer_id> ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"María López\",\"email\":\"maria.lopez@outlook.mx\",\"phone\":\"5523456789\",\"address\":\"Col. Obrera 12, Monterrey, NL\",\"active\":true}"
+  -d "{\"name\":\"Byron Cuenca\",\"email\":\"byron.cuenca@outlook.mx\",\"phone\":\"7774609716\",\"address\":\"U.H Piedra Blanca, Cuautla, Mor\",\"active\":true}"
 
 
 Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/customers/1626806f-cfc5-441a-a63f-6a1a5f3e072c
-
+curl -X DELETE http://localhost:4000/api/customers/<customer_id>
 ==============================================================================================================================================================
 
 
@@ -40,15 +39,15 @@ curl -X DELETE http://localhost:4000/api/customers/1626806f-cfc5-441a-a63f-6a1a5
 Crear (POST):
 curl -X POST http://localhost:4000/api/services ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Póliza Jurídica Digital\",\"description\":\"Protección esencial para tu arrendamiento con cobertura legal básica.\",\"active\":true}"
+  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"name\":\"Póliza Jurídica Digital\",\"description\":\"Protección esencial para tu arrendamiento con cobertura legal básica.\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/services ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Investigación Digital\",\"description\":\"Cobertura ampliada con investigación y negociación de contrato.\",\"active\":true}"
+  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"name\":\"Investigación Digital\",\"description\":\"Cobertura ampliada con investigación y negociación de contrato.\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/services ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Protección Total\",\"description\":\"Maxima protección legal y financiera con cobertura integral.\",\"active\":true}"
+  -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"name\":\"Protección Total\",\"description\":\"Maxima protección legal y financiera con cobertura integral.\",\"active\":true}"
 
 
 Listar (GET):
@@ -62,7 +61,7 @@ curl http://localhost:4000/api/services/<service_id>
 Actualizar (PUT):
 curl -X PUT http://localhost:4000/api/services/<service_id> ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Protección Diamante\",\"description\":\"Cobertura extendida\",\"active\":true}"
+  -d "{\"name\":\"Protección Diamante\",\"description\":\"Cobertura extendida\",\"active\":false}"
 
 
 Eliminar (DELETE):
@@ -74,15 +73,15 @@ curl -X DELETE http://localhost:4000/api/services/<service_id>
 Crear (POST):
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"1626806f-cfc5-441a-a63f-6a1a5f3e072c\",\"user_agent\":\"Chrome/119 Win10\",\"status\":\"ended\"}"
+  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"user_agent\":\"Chrome/119 Win10\",\"status\":\"ended\"}"
 
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"1AQUI ESCRIBIR\",\"user_agent\":\"Safari/17 iOS\",\"status\":\"active\"}"
+  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"user_agent\":\"Safari/17 iOS\",\"status\":\"active\"}"
 
- curl -X POST http://localhost:4000/api/sessions ^
+curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"AQUI ESCRIBIR\",\"user_agent\":\"Firefox/120 Ubuntu\",\"status\":\"active\"}" 
+  -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"user_agent\":\"Firefox/120 Ubuntu\",\"status\":\"active\"}" 
 
 
 Listar (GET):
@@ -94,9 +93,9 @@ curl http://localhost:4000/api/sessions/<session_id>
 
 
 Actualizar (PUT):
-curl.exe -X PUT http://localhost:4000/api/sessions/<SESSION_ID> ^
+curl -X PUT http://localhost:4000/api/sessions/<session_id> ^
   -H "Content-Type: application/json" ^
-  -d "{\"user_agent\":\"Edge/119 Win11\",\"status\":\"active\"}"
+  -d "{\"user_agent\":\"Edge/119 Win11\",\"status\":\"ended\"}"
 
 
 Eliminar (DELETE):
@@ -104,58 +103,22 @@ curl -X DELETE http://localhost:4000/api/sessions/<session_id>
 ===============================================================================================================================================================
 
 
-========================================================================= VERIFICATION =============================================================================
-Crear (POST):
-curl -X POST http://localhost:4000/api/verification ^
-  -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
-
-curl -X POST http://localhost:4000/api/customers ^
-  -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":true}"
-
-curl -X POST http://localhost:4000/api/customers ^
-  -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
-
-
-Listar (GET):
-curl http://localhost:4000/api/verifications
-
-
-Obtener por id (GET):
-curl http://localhost:4000/api/verifications/<verification_id>
-
-
-Actualizar (PUT):
-curl -X PUT http://localhost:4000/api/verifications/<verification_id> ^
-  -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Byron Jorge\",\"email\":\"byron.jorge@yahoo.mx\",\"phone\":\"7351829788\",\"address\":\"Col. Avionetas, Cuautla, Mor\",\"active\":true}"
-
-
-Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/verifications/<verification_id>
-
-==============================================================================================================================================================
-
-
 ========================================================================= PAYMENT =============================================================================
 Crear (POST):
+"1626806f-cfc5-441a-a63f-6a1a5f3e072c" compra un SERVICIO (pagado, tarjeta)
 curl -X POST http://localhost:4000/api/payments ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
+  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"amount\":299.00,\"currency\":\"MXN\",\"method\":\"card\",\"status\":\"paid\",\"external_ref\":\"PAY-001-TPV\"}"
 
-curl -X POST http://localhost:4000/api/cpayments ^
-  -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":true}"
-
+""  paga un SERVICIO (pendiente, transferencia)
 curl -X POST http://localhost:4000/api/payments ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
+  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"amount\":850.00,\"currency\":\"MXN\",\"method\":\"bank\",\"status\":\"pending\",\"external_ref\":\"XFER-001\"}"
 
-curl -X POST http://localhost:4000/api/customers ^
+"" compra un SERVICIO (fallido)
+curl -X POST http://localhost:4000/api/payments ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"María López\",\"email\":\"maria.lopez@outlook.mx\",\"phone\":\"5523456789\",\"address\":\"U.H Piedra Blanca, Cuautla, Mor\",\"active\":true}"
+  -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"amount\":499.00,\"currency\":\"MXN\",\"method\":\"card\",\"status\":\"failed\",\"external_ref\":\"PAY-FAIL-01\"}"
 
 
 Listar (GET):
@@ -169,10 +132,46 @@ curl http://localhost:4000/api/payments/<payment_id>
 Actualizar (PUT):
 curl -X PUT http://localhost:4000/api/payments/<payment_id> ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Byron Jorge\",\"email\":\"byron.jorge@yahoo.mx\",\"phone\":\"7351829788\",\"address\":\"Col. Avionetas, Cuautla, Mor\",\"active\":true}"
+  -d "{\"customer_id\":\"<customer_id>\",\"amount\":699.00,\"currency\":\"MXN\",\"method\":\"oxxo\",\"status\":\"paid\",\"external_ref\":\"OXXO-252625\"}"
 
 
 Eliminar (DELETE):
 curl -X DELETE http://localhost:4000/api/payments/<payment_id>
-
 ==============================================================================================================================================================
+
+
+========================================================================= VERIFICATION =============================================================================
+Crear (POST):
+-- : aprobada
+curl -X POST http://localhost:4000/api/verifications ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"session_id\":\"b2d4b739-be21-4b95-b3fd-db1e6131c919\",\"payment_id\":\"0c8722c1-edc2-485f-9f7c-686025c4306f\",\"type\":\"sms\",\"status\":\"approved\",\"attempts\":1}"
+
+curl -X POST http://localhost:4000/api/verifications ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"session_id\":\"aa823acf-0e6b-4019-876a-f90af1bcaa4c\",\"payment_id\":\"3dd39040-b565-43d3-873b-e48b629a1de9\",\"type\":\"sms\",\"status\":\"expired\",\"attempts\":3}"
+
+curl -X POST http://localhost:4000/api/verifications ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"session_id\":\"5d55043f-244e-41b6-abc8-2f4cd66f08a4\",\"payment_id\":\"51f6267f-e59b-46cf-bd43-af6de41aa825\",\"type\":\"email\",\"status\":\"pending\",\"attempts\":0}"
+
+
+Listar (GET):
+curl http://localhost:4000/api/verifications
+
+
+Obtener por id (GET):
+curl http://localhost:4000/api/verifications/<verification_id>
+
+
+Actualizar (PUT):
+curl -X PUT http://localhost:4000/api/verifications/<verification_id> ^
+  -H "Content-Type: application/json" ^
+  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"session_id\":\"aa823acf-0e6b-4019-876a-f90af1bcaa4c\",\"payment_id\":\"3dd39040-b565-43d3-873b-e48b629a1de9\",\"type\":\"email\",\"status\":\"rejected\",\"attempts\":2}"
+
+
+Eliminar (DELETE):
+curl -X DELETE http://localhost:4000/api/verifications/<verification_id>
+==============================================================================================================================================================
+
+

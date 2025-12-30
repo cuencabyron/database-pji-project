@@ -5,7 +5,7 @@ http://localhost:4000/api/health --> VERFICAR QUE EL ENDPOINT BÁSICO ESTE FUNCI
 Crear (POST):
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Juan Pérez\",\"email\":\"juan.perez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 200, CDMX\",\"active\":true}"
+  -d "{\"name\":\"Kevin Alvarez\",\"email\":\"kev.alvarez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 350, Toluca, Edomex\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
@@ -13,7 +13,7 @@ curl -X POST http://localhost:4000/api/customers ^
 
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Carlos Díaz\",\"email\":\"carlos.diaz@yahoo.mx\",\"phone\":\"5534567890\",\"address\":\"Calle Sur 45, Guadalajara, Jal\",\"active\":true}"
+  -d "{\"name\":\"Carlos Díaz\",\"email\":\"osmar.mendez@yahoo.mx\",\"phone\":\"5512746410\",\"address\":\"Calle Norte 90, Cuernavaca, Mor\",\"active\":true}"
 
 
 Listar (GET):
@@ -21,13 +21,13 @@ curl http://localhost:4000/api/customers
 
 
 Obtener por id (GET):
-curl http://localhost:4000/api/customers/<customer_id>
+curl http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b948fe32ad
 
 
 Actualizar (PUT):
-curl -X PUT http://localhost:4000/api/customers/<customer_id> ^
+curl -X PUT http://localhost:4000/api/customers/108c34b0-c989-4356-b10d-a57d8097639b ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Byron Cuenca\",\"email\":\"byron.cuenca@outlook.mx\",\"phone\":\"7774609716\",\"address\":\"U.H Piedra Blanca, Cuautla, Mor\",\"active\":true}"
+  -d "{\"name\":\"Raul Perez\",\"email\":\"raul.perez@yahoo.mx\",\"phone\":\"2221239850\",\"address\":\"2 Poniente, Puebla, Puebla\",\"active\":true}"
 
 
 Eliminar (DELETE):

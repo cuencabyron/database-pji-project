@@ -5,7 +5,7 @@ http://localhost:4000/api/health --> VERFICAR QUE EL ENDPOINT BÁSICO ESTE FUNCI
 Crear (POST):
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Kevin Alvarez\",\"email\":\"kev.alvarez@gmail.mx\",\"phone\":\"5512345678\",\"address\":\"Av. Reforma 350, Toluca, Edomex\",\"active\":true}"
+  -d "{\"name\":\"Rafael Puente\",\"email\":\"rafa.pte@yahoo.mx\",\"phone\":\"220 734 9029\",\"address\":\"Av.4 Poniente, Linares, NL\",\"active\":false}"
 
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
@@ -25,47 +25,47 @@ curl http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b948fe32ad
 
 
 Actualizar (PUT):
-curl -X PUT http://localhost:4000/api/customers/108c34b0-c989-4356-b10d-a57d8097639b ^
+curl -X PUT http://localhost:4000/api/customers/ca5567d9-3460-4702-9aab-ab7c78d6a3ee ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Raul Perez\",\"email\":\"raul.perez@yahoo.mx\",\"phone\":\"2221239850\",\"address\":\"2 Poniente, Puebla, Puebla\",\"active\":true}"
+  -d "{\"name\":\"Sergio Gomez\",\"email\":\"rafa.puente@yahoo.mx\",\"phone\":\"771 1053 982\",\"address\":\"Juan Morales, Cuautla, Mor\",\"active\":true}"
 
 
 Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/customers/<customer_id>
+curl -X DELETE http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b948fe32ad
 ==============================================================================================================================================================
 
 
-========================================================================= SERVICE =============================================================================
+========================================================================= PRODUCT =============================================================================
 Crear (POST):
-curl -X POST http://localhost:4000/api/services ^
+curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
   -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"name\":\"Póliza Jurídica Digital\",\"description\":\"Protección esencial para tu arrendamiento con cobertura legal básica.\",\"active\":true}"
 
-curl -X POST http://localhost:4000/api/services ^
+curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
   -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"name\":\"Investigación Digital\",\"description\":\"Cobertura ampliada con investigación y negociación de contrato.\",\"active\":true}"
 
-curl -X POST http://localhost:4000/api/services ^
+curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
   -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"name\":\"Protección Total\",\"description\":\"Maxima protección legal y financiera con cobertura integral.\",\"active\":true}"
 
 
 Listar (GET):
-curl http://localhost:4000/api/services
+curl http://localhost:4000/api/products
 
 
 Obtener por id (GET):
-curl http://localhost:4000/api/services/<service_id>
+curl http://localhost:4000/api/products/<product_id>
 
 
 Actualizar (PUT):
-curl -X PUT http://localhost:4000/api/services/<service_id> ^
+curl -X PUT http://localhost:4000/api/products/<product_id> ^
   -H "Content-Type: application/json" ^
   -d "{\"name\":\"Protección Diamante\",\"description\":\"Cobertura extendida\",\"active\":false}"
 
 
 Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/services/<service_id>
+curl -X DELETE http://localhost:4000/api/products/<product_id>
 ==============================================================================================================================================================
 
 
@@ -73,7 +73,7 @@ curl -X DELETE http://localhost:4000/api/services/<service_id>
 Crear (POST):
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"user_agent\":\"Chrome/119 Win10\",\"status\":\"ended\"}"
+  -d "{\"customer_id\":\"ebe310f8-41fe-4b78-bf22-7279bd8e7f7b\",\"user_agent\":\"Firefox/120 Ubintu\",\"status\":\"ended\"}"
 
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
@@ -95,7 +95,7 @@ curl http://localhost:4000/api/sessions/<session_id>
 Actualizar (PUT):
 curl -X PUT http://localhost:4000/api/sessions/<session_id> ^
   -H "Content-Type: application/json" ^
-  -d "{\"user_agent\":\"Edge/119 Win11\",\"status\":\"ended\"}"
+  -d "{\"user_agent\":\"Safari/119 Win10\",\"status\":\"ended\"}"
 
 
 Eliminar (DELETE):
@@ -108,7 +108,7 @@ Crear (POST):
 "1626806f-cfc5-441a-a63f-6a1a5f3e072c" compra un SERVICIO (pagado, tarjeta)
 curl -X POST http://localhost:4000/api/payments ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"amount\":299.00,\"currency\":\"MXN\",\"method\":\"card\",\"status\":\"paid\",\"external_ref\":\"PAY-001-TPV\"}"
+  -d "{\"customer_id\":\"ebe310f8-41fe-4b78-bf22-7279bd8e7f7b\",\"amount\":850.00,\"currency\":\"MXN\",\"method\":\"oxxo\",\"status\":\"paid\",\"external_ref\":\"OXXO-003-TPV\"}"
 
 ""  paga un SERVICIO (pendiente, transferencia)
 curl -X POST http://localhost:4000/api/payments ^
@@ -130,9 +130,9 @@ curl http://localhost:4000/api/payments/<payment_id>
 
 
 Actualizar (PUT):
-curl -X PUT http://localhost:4000/api/payments/<payment_id> ^
+curl -X PUT http://localhost:4000/api/payments/0c8722c1-edc2-485f-9f7c-686025c4306f ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"<customer_id>\",\"amount\":699.00,\"currency\":\"MXN\",\"method\":\"oxxo\",\"status\":\"paid\",\"external_ref\":\"OXXO-252625\"}"
+  -d "{\"customer_id\":\"ebe310f8-41fe-4b78-bf22-7279bd8e7f7b\",\"amount\":3500.00,\"currency\":\"MXN\",\"method\":\"oxxo\",\"status\":\"paid\",\"external_ref\":\"OXXO-225\"}"
 
 
 Eliminar (DELETE):

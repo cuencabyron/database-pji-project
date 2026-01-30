@@ -15,7 +15,7 @@
 | `updated_at`     | DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP     | Última modificación.                                                        |
 
 ---
-- **Tabla SERVICE:** Catálogo de servicios (p. ej., Póliza Jurídica Digital, Investigación Digital, Protección Total, etc.) con tarifa.
+- **Tabla PRODUCT:** Catálogo de servicios (p. ej., Póliza Jurídica Digital, Investigación Digital, Protección Total, etc.) con tarifa.
 
 |       CAMPO      |                      TIPO                       |                                 DESCRIPCIÓN                                 |
 |       ----       |                      ----                       |                                    ----                                     |
@@ -35,7 +35,7 @@
 | `session_id`     | CHAR(36) NOT NULL (PK)                          | Identificador único (UUID) de la sesión, estable para exponer en APIs.      |
 | `customer_id`    | CHAR(36) NOT NULL (FK)                          | Cliente asociado.                                                           |
 | `user_agent`     | VARCHAR(255) NOT NULL                           | Navegador/dispositivo.                                                      |
-| `status`         | VARCHAR(20) NOT NULL DEFAULT 'active'           | active / revoked / expired                                                    |
+| `status`         | VARCHAR(20) NOT NULL DEFAULT 'active'           | active / ended / expired                                                    |
 | `started_at`     | DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP     | Inicio de la sesión.                                                        |
 | `ended_at`       | DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP     | Fin de la sesión (al cerrar o expirar).                                     |
 | `created_at`     | DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP     | Alta del registro.                                                          |

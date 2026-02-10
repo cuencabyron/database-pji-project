@@ -40,31 +40,29 @@ USE portal_pji_project;             -- Define la base de datos a utilizar.
 */
 CREATE TABLE customer (                                              
   customer_id    CHAR(36)      NOT NULL,                             
-  name           VARCHAR(200)  NOT NULL,                             
-  email          VARCHAR(255)  NOT NULL,                             
+  name           VARCHAR(100)  NOT NULL,                             
+  email          VARCHAR(100)  NOT NULL,                             
   phone          VARCHAR(25)   NOT NULL,                                    
-  address        VARCHAR(255)  NOT NULL,                                           
+  address        VARCHAR(100)  NOT NULL,                                           
   active         TINYINT(1)    NOT NULL DEFAULT 1,                    
   created_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,      
-  updated_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,   
-                               
+  updated_at     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,                     
   PRIMARY KEY (customer_id)     
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* ======================================================================= */
 
 
-/* ========================== SERVICE ========================== */
-CREATE TABLE service (
-  service_id     CHAR(36)       NOT NULL, 
-  customer_id    CHAR(36)       NOT NULL,                 
-  name           VARCHAR(150)   NOT NULL,                             
-  description    VARCHAR(255)   NOT NULL,                                                      
-  active         TINYINT(1)     NOT NULL DEFAULT 1,                  
-  created_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (service_id),
-  CONSTRAINT fk_customer_service
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+/* ========================== PRODUCT ========================== */
+CREATE TABLE product (
+  product_id       CHAR(36)        NOT NULL,                  
+  name             VARCHAR(150)    NOT NULL,                             
+  description      VARCHAR(255)    NOT NULL,  
+  min_monthly_rent DECIMAL(10,3)   NOT NULL,
+  max_monthly_rent DECIMAL(10,3)   NOT NULL,                                                    
+  active           TINYINT(1)      NOT NULL DEFAULT 1,                  
+  created_at       DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at       DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* ============================================================== */
 
@@ -89,8 +87,9 @@ CREATE TABLE session (
 /* =========================== PAYMENT ========================= */
 CREATE TABLE payment (
   payment_id     CHAR(36)       NOT NULL,                 
-  customer_id    CHAR(36)       NOT NULL,                                                                     
-  amount         DECIMAL(12,2)  NOT NULL CHECK (amount >= 0),        
+  customer_id    CHAR(36)       NOT NULL, 
+  product_id     CHAR(36)       NOT NULL,                                                                    
+  amount         DECIMAL(10,3)  NOT NULL CHECK (amount >= 0),        
   currency       CHAR(3)        NOT NULL DEFAULT 'MXN',             
   method         VARCHAR(30)    NOT NULL,                            
   status         VARCHAR(20)    NOT NULL DEFAULT 'pending',          
@@ -101,6 +100,10 @@ CREATE TABLE payment (
   PRIMARY KEY (payment_id), 
   CONSTRAINT fk_customer_payment
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id) 
+  
+  CONSTRAINT fk_payment_product
+    FOREIGN KEY (product_id) REFERENCES product(product_id);
+
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* =============================================================== */
 
@@ -131,27 +134,4 @@ CREATE TABLE verification (
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE INDEX idx_verification_customer_status ON verification (customer_id, status);
-/* ========================================================================================= */
-
-
-/* ====================== SERVICE_PRICE_RANGE ====================== */
-CREATE TABLE service_price_range (
-  range_id         CHAR(36)      NOT NULL,
-  service_id       CHAR(36)      NOT NULL,
-  min_monthly_rent VARCHAR(10)   NOT NULL,             
-  max_monthly_rent VARCHAR(10)   NOT NULL,                       
-  annual_price     VARCHAR(10)   NOT NULL,              
-  currency         CHAR(3)       NOT NULL DEFAULT 'MXN',
-  description      VARCHAR(255)  NOT NULL,                      
-  created_at       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (range_id),
-  CONSTRAINT fk_range_service
-    FOREIGN KEY (service_id) REFERENCES service(service_id),
-  CONSTRAINT chk_rent_interval CHECK (min_monthly_rent >= 0 AND (max_monthly_rent IS NULL OR max_monthly_rent > min_monthly_rent))
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Índices útiles para búsqueda por renta
-CREATE INDEX idx_range_service_bounds
-  ON service_price_range (service_id, min_monthly_rent, max_monthly_rent);
 /* ========================================================================================= */

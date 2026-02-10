@@ -139,6 +139,9 @@ Eliminar (DELETE):
 curl -X DELETE http://localhost:4000/api/payments/<payment_id>
 ==============================================================================================================================================================
 
+ALTER TABLE payment
+ADD CONSTRAINT fk_product_payment
+FOREIGN KEY (product_id) REFERENCES product(product_id);
 
 ========================================================================= VERIFICATION =============================================================================
 Crear (POST):

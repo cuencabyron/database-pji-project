@@ -78,7 +78,7 @@ CREATE TABLE session (
   created_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   updated_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (session_id), 
-  CONSTRAINT fk_customer_session
+  CONSTRAINT fk_session_customer
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* ======================================================================================= */
@@ -86,8 +86,8 @@ CREATE TABLE session (
 
 /* =========================== PAYMENT ========================= */
 CREATE TABLE payment (
-  payment_id     CHAR(36)       NOT NULL,                 
-  customer_id    CHAR(36)       NOT NULL, 
+  payment_id     CHAR(36)       NOT NULL,  
+  customer_id     CHAR(36)       NOT NULL,                 
   product_id     CHAR(36)       NOT NULL,                                                                    
   amount         DECIMAL(10,3)  NOT NULL CHECK (amount >= 0),        
   currency       CHAR(3)        NOT NULL DEFAULT 'MXN',             
@@ -98,15 +98,12 @@ CREATE TABLE payment (
   created_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at     DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   PRIMARY KEY (payment_id), 
-  CONSTRAINT fk_customer_payment
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) 
-  
+  CONSTRAINT fk_payment_customer
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
   CONSTRAINT fk_payment_product
-    FOREIGN KEY (product_id) REFERENCES product(product_id);
-
+    FOREIGN KEY (product_id) REFERENCES product(product_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /* =============================================================== */
-
 
 /* ====================================== VERIFICATION =================================== */
 CREATE TABLE verification (
@@ -122,16 +119,11 @@ CREATE TABLE verification (
   created_at      DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   updated_at      DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   PRIMARY KEY (verification_id),  
-
-  CONSTRAINT fk_payment_verification
+  CONSTRAINT fk_verification_payment
     FOREIGN KEY (payment_id) REFERENCES payment(payment_id),
-
-  CONSTRAINT fk_customer_verification
+  CONSTRAINT fk_verification_customer
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-
-  CONSTRAINT fk_session_verification
+  CONSTRAINT fk_verification_session
     FOREIGN KEY (session_id) REFERENCES session(session_id)
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE INDEX idx_verification_customer_status ON verification (customer_id, status);
 /* ========================================================================================= */

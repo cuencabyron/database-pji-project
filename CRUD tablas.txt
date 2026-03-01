@@ -5,15 +5,15 @@ http://localhost:4000/api/health --> VERFICAR QUE EL ENDPOINT BÁSICO ESTE FUNCI
 Crear (POST):
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Rafael Puente\",\"email\":\"rafa.pte@yahoo.mx\",\"phone\":\"220 734 9029\",\"address\":\"Av.4 Poniente, Linares, NL\",\"active\":false}"
+  -d "{\"name\":\"Byron Cuenca\",\"email\":\"byronjorge.168@gmail.com\",\"phone\":\"+52 735 182 9788\",\"address\":\"U.H. Piedra Blanca, Cuautla, Mor\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Ana Torres\",\"email\":\"ana.torres@hotmail.mx\",\"phone\":\"5545678901\",\"address\":\"Montejo 123, Mérida, Yuc\",\"active\":false}"
+  -d "{\"name\":\"Ana Torres\",\"email\":\"anatrs@hotmail.com\",\"phone\":\"+52 55 8194 7699\",\"address\":\"Av. Reforma 123, Cuauhtémoc, CDMX\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/customers ^
   -H "Content-Type: application/json" ^
-  -d "{\"name\":\"Carlos Díaz\",\"email\":\"osmar.mendez@yahoo.mx\",\"phone\":\"5512746410\",\"address\":\"Calle Norte 90, Cuernavaca, Mor\",\"active\":true}"
+  -d "{\"name\":\"Victor Gutiérrez\",\"email\":\"victorgtz@yahoo.mx\",\"phone\":\"+52 222 334 4556\",\"address\":\"Av. Juárez #321, Puebla, Puebla\",\"active\":true}"
 
 
 Listar (GET):
@@ -21,7 +21,7 @@ curl http://localhost:4000/api/customers
 
 
 Obtener por id (GET):
-curl http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b948fe32ad
+curl http://localhost:4000/api/customers/30b5d9bd-8dd5-4831-a8ca-7fa1adb960f6
 
 
 Actualizar (PUT):
@@ -31,7 +31,7 @@ curl -X PUT http://localhost:4000/api/customers/ca5567d9-3460-4702-9aab-ab7c78d6
 
 
 Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b948fe32ad
+curl -X DELETE http://localhost:4000/api/customers/30b5d9bd-8dd5-4831-a8ca-7fa1adb960f6
 ==============================================================================================================================================================
 
 
@@ -39,15 +39,15 @@ curl -X DELETE http://localhost:4000/api/customers/583e2f58-e0b6-4fd2-adb1-c6b94
 Crear (POST):
 curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"a8383ee4-93cd-418c-8cd4-2845b2726de1\",\"name\":\"Póliza Jurídica Digital\",\"description\":\"Protección esencial para tu arrendamiento con cobertura legal básica.\",\"active\":true}"
+  -d "{\"name\":\"Esencial\",\"description\":\"Cobertura enfocada en la recuperación del inmueble ante falta de pago, abandono o entrega voluntaria. Incluye intervención extrajucial al primer atraso y acción judicial desde el segundo mes impago.\",\"min_monthly_rent\":3500.000,\"max_monthly_rent\":4949.000,\"active\":true}"
 
 curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"583e2f58-e0b6-4fd2-adb1-c6b948fe32ad\",\"name\":\"Investigación Digital\",\"description\":\"Cobertura ampliada con investigación y negociación de contrato.\",\"active\":true}"
+  -d "{\"name\":\"Premium\",\"description\":\"Incluye todos los beneficios de Esencial y añade acompañamiento legal cuando el inquilino se niega a entregar el inmueble o a formalizar un nuevo acuerdo de arrendamiento.\",\"active\":true}"
 
 curl -X POST http://localhost:4000/api/products ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"02a606c7-e398-4f3e-8bde-cb553b61db8b\",\"name\":\"Protección Total\",\"description\":\"Maxima protección legal y financiera con cobertura integral.\",\"active\":true}"
+  -d "{\"name\":\"Diamante\",\"description\":\"Integra las coberturas de Esencial y Premium y amplía la protección con recuperación contenciosa de rentas, servicios e intereses moratorios. Requiere fiador con propiedad libre de gravemente.\",\"active\":true}"
 
 
 Listar (GET):
@@ -65,7 +65,7 @@ curl -X PUT http://localhost:4000/api/products/<product_id> ^
 
 
 Eliminar (DELETE):
-curl -X DELETE http://localhost:4000/api/products/<product_id>
+curl -X DELETE http://localhost:4000/api/products/bd90cb9d-0883-4719-a5fd-a1ef6cfe93e9
 ==============================================================================================================================================================
 
 
@@ -73,7 +73,7 @@ curl -X DELETE http://localhost:4000/api/products/<product_id>
 Crear (POST):
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"ebe310f8-41fe-4b78-bf22-7279bd8e7f7b\",\"user_agent\":\"Firefox/120 Ubintu\",\"status\":\"ended\"}"
+  -d "{\"customer_id\":\"b831a6b8-a7e5-4b4d-a490-4c449bc4d3d3\",\"user_agent\":\"Safari/17 macOS\",\"status\":\"active\"}"
 
 curl -X POST http://localhost:4000/api/sessions ^
   -H "Content-Type: application/json" ^
@@ -108,7 +108,7 @@ Crear (POST):
 "1626806f-cfc5-441a-a63f-6a1a5f3e072c" compra un SERVICIO (pagado, tarjeta)
 curl -X POST http://localhost:4000/api/payments ^
   -H "Content-Type: application/json" ^
-  -d "{\"customer_id\":\"ebe310f8-41fe-4b78-bf22-7279bd8e7f7b\",\"amount\":850.00,\"currency\":\"MXN\",\"method\":\"oxxo\",\"status\":\"paid\",\"external_ref\":\"OXXO-003-TPV\"}"
+  -d "{\"customer_id\":\"9ec12897-e995-45fa-b56a-0abb53cb85f3\",\"product_id\":\"a7f978b8-78fe-4d78-a303-1eec3a1e145c\",\"method\":\"oxxo\"}"
 
 ""  paga un SERVICIO (pendiente, transferencia)
 curl -X POST http://localhost:4000/api/payments ^
